@@ -1,17 +1,21 @@
 # Hashtag Norovirus
 
+
 An experiment in using social media for public health surveillance. Tools and concepts used in this hack could include:
 
 * Natural Language Processing
 * Creation and consumption of APIs
 * Visualzation and Analytics environments
 * Data integration services
-* Machine Lerning 
-* Graph Databases - for offline storage of social media network.
+* Machine Learning 
+* Graph Databases - for offline storage of social network.
+* Sentiment Analysis
 
 This is a proposed project for the University of Michigan 2016 [Hacks With Friends](http://cio.umich.edu/michigan-it/hacks-with-friends). This github repository will be a place to collaboratively develop code and documentation. Ideally we will expose a Restful ODATA service that could be consumed in multiple contexts. We could also choose to present and anlyze the data in a streaming analytics pipeline.
 
-Initial documentation can take place on the [project wiki](https://github.com/jestill/hashtag-norovirus/wiki). 
+Initial documentation can take place on the [project wiki](https://github.com/jestill/hashtag-norovirus/wiki).
+
+MCommunity Group is : [https://mcommunity.umich.edu/#group:hashtag-norovirus](https://mcommunity.umich.edu/#group:hashtag-norovirus)
 
 ## Potential Discrete Events to Model
 
@@ -48,6 +52,8 @@ The following resources will potentially help with the hack.
 #### Twitter
 
 Twitter APIs could provide a route to get streaming data.
+
+* Test Data streams - [https://dev.twitter.com/streaming/public](https://dev.twitter.com/streaming/public).
 
 #### Instagram
 
