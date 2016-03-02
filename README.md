@@ -49,7 +49,9 @@ The following resources will potentially help with the hack.
 
 ### Public APIs
 
-This list of social media APIs is [https://github.com/jestill/hashtag-norovirus/wiki/Social-Media-APIs](documented on the wiki).
+This list of social media APIs is on the wiki
+
+https://github.com/jestill/hashtag-norovirus/wiki/Social-Media-APIs
 
 ### Natural Langauge Processing
 
