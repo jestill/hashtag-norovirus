@@ -19,7 +19,7 @@ In addition to just norovirus, we can also try to build a generic model that all
 
 * **Norovirus** - Can we identify and report on the recent spread of Norovirus on campus.
 * **Flint Water Crises** - Can we identify signals of low water quality associated with the switch to Flint river as a water source.
-* **UM Football Games** - Can we identify when UM had a football game, and can we distinguish home games from away games.
+* **UM Football Games** - Can we identify when UM had a football game, and can we distinguish home games from away games. Can we identify if a game was a win or a loss based on social media data.
 * **UM Basketball Games** - Can we identify whem UM has a basketball game, and can we distinguish between men's and women's games
 * **Finals Week** - Can we identify when UM is having finals week and can we identify a metric of student stress around this.
 * **Spring Break** - Can we identify the time of spring break based on social media listening.
