@@ -49,24 +49,7 @@ The following resources will potentially help with the hack.
 
 ### Public APIs
 
-#### Twitter
-
-Twitter APIs could provide a route to get streaming data.
-
-* Test Data streams - [https://dev.twitter.com/streaming/public](https://dev.twitter.com/streaming/public).
-
-#### Instagram
-
-[Instagram API](https://www.instagram.com/developer/) - seems to assume developers are building non-automated APIs.
-
-#### Facebook
-
-Facebook has an API.
-
-#### Google+
-
-API [https://developers.google.com/+/web/api/rest/](https://developers.google.com/+/web/api/rest/).
-
+This list of social media APIs is [https://github.com/jestill/hashtag-norovirus/wiki/Social-Media-APIs](documented on the wiki).
 
 ### Natural Langauge Processing
 
