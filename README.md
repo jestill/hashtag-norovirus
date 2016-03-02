@@ -7,6 +7,7 @@ An experiment in using social media for public health surveillance. Tools and co
 * Visualzation and Analytics environments
 * Data integration services
 * Machine Lerning 
+* Graph Databases - for offline storage of social media network.
 
 This is a proposed project for the University of Michigan 2016 [Hacks With Friends](http://cio.umich.edu/michigan-it/hacks-with-friends). This github repository will be a place to collaboratively develop code and documentation. Ideally we will expose a Restful ODATA service that could be consumed in multiple contexts. We could also choose to present and anlyze the data in a streaming analytics pipeline.
 
@@ -31,9 +32,9 @@ Jamie is currently thinking about something like:
 
 * **person** - The real life person or other entity that is behind the online persona. A person is an indviduval real life person, and an entity could be the entity associated with the A person can have multiple online media personas. This colum provides a way to reconcile a person or entity that is known to have multiple online personas (twitter stream, instagram account, facebook account etc). This is a generic identifier should be anonomized to a hash.
 * **personaID** - The online social presence of a person. Twitter account, instagram etc. This could also be an anonomized hash that is built from incoming data. Something line md5sum ( personaURI & enrypteKEYString ). Having an anonomized personaID would allow for publishing resources and services as anonymous data streams.
-* **personaURI** - The URL identifying the online persona.
+* **personaURI** - The URL identifying the online persona. For example [https://twitter.com/DrMarkSchlissel](https://twitter.com/DrMarkSchlissel).
 * **platform** - The name of the social media platform being used to present the persona. Ideally a URL that can be used as a URI to reference the platform.
-* **messageURI** - Unique URI of the message. (ie. Twitter URL or something else).
+* **messageURI** - Unique URI of the message. (ie. Twitter URL or something else). The URL for a specific social media message. For example [https://twitter.com/DrMarkSchlissel/status/700426187907166208](https://twitter.com/DrMarkSchlissel/status/700426187907166208).
 * **timeOfMessage** - The time that the message was sent as a timestamp. (Should not be NULL).
 * **placeOfMessage** - The location the message was sent from in GIS coordinates. (Could be NULL)
 * **messageString** - The social media message string as text. (Should not be NULL).
