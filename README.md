@@ -65,7 +65,7 @@ Facebook has an API.
 
 #### Google+
 
-What is the API?.
+API [https://developers.google.com/+/web/api/rest/](https://developers.google.com/+/web/api/rest/).
 
 
 ### Natural Langauge Processing
