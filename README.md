@@ -1,9 +1,14 @@
 # Hashtag Norovirus
 
-An experiment in using social media for public health surveillance.
+An experiment in using social media for public health surveillance. Tools and concepts used in this hack could include:
 
-This is a proposed project for the University of Michigan 2016 [Hacks With Friends](http://cio.umich.edu/michigan-it/hacks-with-friends). This github repository will be a place to collaboratively develop code and documentation.
+* Natural Language Processing
+* Creation and consumption of APIs
+* Visualzation and Analytics environments
+* Data integration services
+* Machine Lerning 
 
+This is a proposed project for the University of Michigan 2016 [Hacks With Friends](http://cio.umich.edu/michigan-it/hacks-with-friends). This github repository will be a place to collaboratively develop code and documentation. Ideally we will expose a Restful ODATA service that could be consumed in multiple contexts. We could also choose to present and anlyze the data in a streaming analytics pipeline.
 
 Initial documentation can take place on the [project wiki](https://github.com/jestill/hashtag-norovirus/wiki). 
 
@@ -15,20 +20,21 @@ In addition to just norovirus, we can also try to build a generic model that all
 * **Flint Water Crises** - Can we identify signals of low water quality associated with the switch to Flint river as a water source.
 * **UM Football Games** - Can we identify when UM had a football game, and can we distinguish home games from away games.
 * **UM Basketball Games** - Can we identify whem UM has a basketball game, and can we distinguish between men's and women's games
-* **Finals Week** - Can we identify when UM is having finals week.
-* **Spring Break** - Can we identify the time of spring break based on social media listening. This one would be interesting because it invovles.
+* **Finals Week** - Can we identify when UM is having finals week and can we identify a metric of student stress around this.
+* **Spring Break** - Can we identify the time of spring break based on social media listening.
 
 ## Basic Data Model
 
 Identifying a basic data model early will be helpful in quickly moving forward. Jamie is currently thinking about something like:
 
 * **person** - The real life person or other entity that is behind the online persona. A person is an indviduval real life person, and an entity could be the entity associated with the A person can have multiple online media personas. This colum provides a way to reconcile a person or entity that is known to have multiple online personas (twitter stream, instagram account, facebook account etc). This is a generic identifier should be anonomized to a hash.
-* **persona** - The online social presence of a person. Twitter account, instagram etc. This could also be an anonomized hash that is built from incoming data. Something line md5sum (  ).
+* **personaID** - The online social presence of a person. Twitter account, instagram etc. This could also be an anonomized hash that is built from incoming data. Something line md5sum ( personaURI & enrypteKEYString ). Having an anonomized personaID would allow for publishing resources and services as anonymous data streams.
+* **personaURI** - The URL identifying the online persona.
 * **platform** - The name of the social media platform being used to present the persona. Ideally a URL that can be used as a URI to reference the platform.
 * **messageURI** - Unique URI of the message. (ie. Twitter URL or something else).
-* **timeOfMessage** - The time that the message was sent.
-* **placeOfMessage** - The location the message was sent from in GIS coordinates.
-* **messageString** - The social media message string as text.
+* **timeOfMessage** - The time that the message was sent as a timestamp. (Should not be NULL).
+* **placeOfMessage** - The location the message was sent from in GIS coordinates. (Could be NULL)
+* **messageString** - The social media message string as text. (Should not be NULL).
 
 ## Resources
 
