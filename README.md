@@ -25,7 +25,9 @@ In addition to just norovirus, we can also try to build a generic model that all
 
 ## Basic Data Model
 
-Identifying a basic data model early will be helpful in quickly moving forward. Jamie is currently thinking about something like:
+Identifying a basic data model for representation of the social medai data will help us get quickly started.
+Ideally this would not be linked to a specific social media listening use case or single platform.
+Jamie is currently thinking about something like:
 
 * **person** - The real life person or other entity that is behind the online persona. A person is an indviduval real life person, and an entity could be the entity associated with the A person can have multiple online media personas. This colum provides a way to reconcile a person or entity that is known to have multiple online personas (twitter stream, instagram account, facebook account etc). This is a generic identifier should be anonomized to a hash.
 * **personaID** - The online social presence of a person. Twitter account, instagram etc. This could also be an anonomized hash that is built from incoming data. Something line md5sum ( personaURI & enrypteKEYString ). Having an anonomized personaID would allow for publishing resources and services as anonymous data streams.
