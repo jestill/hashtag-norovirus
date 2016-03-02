@@ -7,11 +7,62 @@ This is a proposed project for the University of Michigan 2016 [Hacks With Frien
 
 Initial documentation can take place on the [project wiki](https://github.com/jestill/hashtag-norovirus/wiki). 
 
+## Potential Discrete Events to Model
+
+In addition to just norovirus, we can also try to build a generic model that allows us to generally pick up signals from other discrete events. The goal would be to parameterize the model based on discrete events with known start and end times. These can include sports events, weather events, academic calendar events, and other geographically constrained events such as the Flint water crises.
+
+* **Norovirus** - Can we identify and report on the recent spread of Norovirus on campus.
+* **Flint Water Crises** - Can we identify signals of low water quality associated with the switch to Flint river as a water source.
+* **UM Football Games** - Can we identify when UM had a football game, and can we distinguish home games from away games.
+* **UM Basketball Games** - Can we identify whem UM has a basketball game, and can we distinguish between men's and women's games
+* **Finals Week** - Can we identify when UM is having finals week.
+* **Spring Break** - Can we identify the time of spring break based on social media listening. This one would be interesting because it invovles.
+
+## Basic Data Model
+
+Identifying a basic data model early will be helpful in quickly moving forward. Jamie is currently thinking about something like:
+
+* **person** - The real life person or other entity that is behind the online persona. A person is an indviduval real life person, and an entity could be the entity associated with the A person can have multiple online media personas. This colum provides a way to reconcile a person or entity that is known to have multiple online personas (twitter stream, instagram account, facebook account etc). This is a generic identifier should be anonomized to a hash.
+* **persona** - The online social presence of a person. Twitter account, instagram etc. This could also be an anonomized hash that is built from incoming data. Something line md5sum (  ).
+* **platform** - The name of the social media platform being used to present the persona. Ideally a URL that can be used as a URI to reference the platform.
+* **messageURI** - Unique URI of the message. (ie. Twitter URL or something else).
+* **timeOfMessage** - The time that the message was sent.
+* **placeOfMessage** - The location the message was sent from in GIS coordinates.
+* **messageString** - The social media message string as text.
+
 ## Resources
 
 The following resources will potentially help with the hack.
 
-### Twitter APIs
+### Public APIs
+
+#### Twitter
+
+Twitter APIs could provide a route to get streaming data.
+
+#### Instagram
+
+[Instagram API](https://www.instagram.com/developer/) - seems to assume developers are building non-automated APIs.
+
+#### Facebook
+
+Facebook has an API.
+
+#### Google+
+
+What is the API?.
+
+
+### Natural Langauge Processing
+
+There could be a component of natural language processing to this hack.
+
+### Visualization and Analytics Environment
+
+Visualization of the streamed data could allow for simple consumption of the data streams.
+
+* [Tableau](http://www.tableau.com) - Is a commercial application for visual analytics that can accepte OData streams as input. 
+* [JBoss Dashbuilder]() - Is an open source dashboarding and analytics environment that can support analytics of real time streaming data.
 
 ### Git and GitHub Resources
 
