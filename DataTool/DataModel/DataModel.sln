@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockData", "MockData\MockData.csproj", "{D17B87BA-10D1-4C2A-B904-4ED5D8C23625}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterDumpApp", "TwitterDumpApp\TwitterDumpApp.csproj", "{FFC59284-F3FD-40EA-97AF-D930F62C0880}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D17B87BA-10D1-4C2A-B904-4ED5D8C23625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D17B87BA-10D1-4C2A-B904-4ED5D8C23625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D17B87BA-10D1-4C2A-B904-4ED5D8C23625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC59284-F3FD-40EA-97AF-D930F62C0880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC59284-F3FD-40EA-97AF-D930F62C0880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC59284-F3FD-40EA-97AF-D930F62C0880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC59284-F3FD-40EA-97AF-D930F62C0880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

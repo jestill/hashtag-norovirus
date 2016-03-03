@@ -1,4 +1,5 @@
-﻿using Norovirus.DataModel;
+﻿using Norovirus;
+using Norovirus.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
