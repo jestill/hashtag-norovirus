@@ -46,10 +46,10 @@ open (OUT, ">$outfile") ||
 # Load the search terms to an array
 my @terms;
 while (<TERMS>) {
-
+    
     chomp;
     push @terms, $_;
-
+    
 }
 
 
@@ -65,11 +65,31 @@ foreach my $term (@terms) {
 	# PRINT OUT MATCHES HERE
 	
 	if ( $_ =~ /$term/ ) {
-	    print OUT $_."\n";
+
+	    # The following is 
+#	    print OUT $_."\n";
+
+	    # SPLIT THE STRING
+
+	    # NEED TO SWITCH THE FOLLOWING TO THE DELIM
+	    my @in_cols = split (/\t/, $_);	    
+#	    my @in_cols = split (/\t/, $_);
+	    # The following for pipe delim
+#	    my @in_cols = split (/\|/, $_);
+	    
+	    # NEED TO SWITCH THE FOLLOWING
+	    my $message_id = "test-id";
+	    
+	    print OUT $message_id."\t".
+		$term."\n";
 	}
 
 	
+	
     }
+
+    # REST THE FILE TO THE BEGINNING
+    seek INFILE, 0, 0;
     
 }
 
