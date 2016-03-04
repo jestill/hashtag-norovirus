@@ -1,0 +1,10 @@
+norovirus
+flu
+sick
+stomach
+throw up
+vomit
+diarrhea
+bathroom
+outbreak
+bug
