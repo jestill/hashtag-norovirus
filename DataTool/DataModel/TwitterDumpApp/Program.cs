@@ -44,24 +44,36 @@ namespace TwitterDumpApp
             stopwatch.Start();
             var response = GetData(manager);
             responseList.Add(response);
-            var sinceId = response.search_metadata.since_id_str;
+            var sinceId = response.statuses.Max(r => r.id); //TODO sinceId does not seem to play nice
+            var maxId = response.statuses.Min(r => r.id) - 1;
 
             // Fetch remaining batches
             for (int i = 0; i < batchCount; i++)
             {
-                response = GetData(manager, sinceId);
+                response = GetData(manager, maxId.Value.ToString());
+                if (response.statuses.Count() < 1)
+                    break;
                 responseList.Add(response);
-                sinceId = response.search_metadata.since_id_str;
+                sinceId = response.statuses.Max(r => r.id);
+                maxId = response.statuses.Min(r => r.id) - 1;
             }
             stopwatch.Stop();
             Console.WriteLine("Elapsed time: " + stopwatch.ElapsedMilliseconds);
             return responseList;
         }
 
-        static TwitterResponse GetData(TwitterManager manager, string maxId = null)
+        static TwitterResponse GetData(TwitterManager manager, string maxId = null, string sinceId = null)
         {
-            Console.WriteLine("Fetching batch...");
-            var result = manager.GetApiData(query).Result;
+            var baseQuery = query;
+
+            if (maxId != null)
+                baseQuery += String.Format("&max_id={0}", maxId);
+            if (sinceId != null)
+                baseQuery += String.Format("&since_id={0}", sinceId);
+
+            Console.WriteLine("Fetching batch... (query: \"" + baseQuery + "\")");
+
+            var result = manager.GetApiData(baseQuery).Result;
             return result;
         }
     }
