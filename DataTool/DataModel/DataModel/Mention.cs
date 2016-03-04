@@ -15,12 +15,13 @@ namespace Norovirus.DataModel
         public int MessageID { get; set; }
         public DateTime TimeOfMessage { get; set; }
         public GeoCoordinate LocationOfMessage { get; set; }
+        public string NamedLocation { get; set; }
         public string Message { get; set; }
         public string Provenance { get; set; }
 
         public override string ToString()
         {
-            return $"MessageID:{MessageID} PersonaID:{PersonaID} Timestamp:{TimeOfMessage} Long:{LocationOfMessage?.Longitude} Lat:{LocationOfMessage?.Latitude} Message:{Message}";
+            return $"MessageID:{MessageID} PersonaID:{PersonaID} Timestamp:{TimeOfMessage} Long:{LocationOfMessage?.Longitude} Lat:{LocationOfMessage?.Latitude} NamedLocation:{NamedLocation} Message:{Message}";
         }
     }
 }
