@@ -9,20 +9,28 @@ using System.Threading.Tasks;
 
 namespace TwitterDumpApp
 {
-    class TwitterResponseMapper
+    public class TwitterResponseMapper
     {
-
         private static DateTime fromString(string s)
         {
-
             //Thu Mar 03 16:51:13 +0000 2016
             return DateTime.ParseExact(s, "ddd MMM dd HH:mm:ss zzz yyyy", CultureInfo.InvariantCulture);
         }
 
-        public IEnumerable<Mention> Map(TwitterResponse responses, string provenance)
+        public IEnumerable<Mention> MapMany(IEnumerable<TwitterResponse> responses, string provenance)
         {
-            List<Mention> result = new List<Mention>();
-            foreach (Status status in responses.statuses)
+            var mentions = new List<Mention>();
+            foreach (var response in responses)
+            {
+                mentions.AddRange(Map(response, provenance));
+            }
+            return mentions;
+        }
+
+        public IEnumerable<Mention> Map(TwitterResponse response, string provenance)
+        {
+            IList<Mention> result = new List<Mention>();
+            foreach (Status status in response.statuses)
             {
                 Mention m = new Mention();
                 m.PersonID = status.user.screen_name;
@@ -34,9 +42,7 @@ namespace TwitterDumpApp
                 m.Provenance = provenance;
                 result.Add(m);
             }
-
             return result;
-
         }
     }
 }
