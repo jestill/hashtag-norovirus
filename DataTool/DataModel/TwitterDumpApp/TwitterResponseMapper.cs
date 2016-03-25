@@ -1,4 +1,5 @@
-﻿using Norovirus.DataModel;
+﻿using Newtonsoft.Json.Linq;
+using Norovirus.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
@@ -27,6 +28,25 @@ namespace TwitterDumpApp
             return mentions;
         }
 
+        private void parseLocation(Mention m, Status s)
+        {
+
+            var geoEnabled = s.user.geo_enabled;
+            var coordinates = s.coordinates;
+            var place = s.place;
+            if ( s.coordinates !=null )
+            {
+                var c = (s.coordinates as JObject).Last.First as JToken;
+                m.LocationOfMessage = new GeoCoordinate( Double.Parse(c.Last.ToString()), Double.Parse(c.First.ToString()));
+            }
+            if ( place != null)
+            {
+                m.NamedLocation = place.full_name;
+            }
+
+        }
+
+
         public IEnumerable<Mention> Map(TwitterResponse response, string provenance)
         {
             IList<Mention> result = new List<Mention>();
@@ -37,7 +57,7 @@ namespace TwitterDumpApp
                 m.PlatformID = "Twitter";
                 m.TimeOfMessage =   fromString(status.created_at);
                 //GeoCoordinate location = new GeoCoordinate();
-                m.LocationOfMessage = null; //TODO
+                parseLocation(m, status); //TODO
                 m.Message = status.text;
                 m.Provenance = provenance;
                 result.Add(m);
