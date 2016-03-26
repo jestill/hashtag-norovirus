@@ -29,14 +29,34 @@
 use strict;
 use Getopt::Long;
 use Digest::MD5 qw(md5 md5_hex md5_base64);
+# The following needed for printing help
+use Pod::Select;               # Print subsections of POD documentation
+use Pod::Text;                 # Print POD doc as formatted text file
+use IO::Scalar;                # For print_help subfunction
+use IO::Pipe;                  # Pipe for STDIN, STDOUT for POD docs
+use File::Spec;                # Convert a relative path to an abosolute path
 
 #-----------------------------+
 # VARIABLES                   |
 #-----------------------------+
+my ($VERSION) = "0.1";
+
 my $search_file;               # The file we search against
 my $search_terms;              # The terms we are searching for
 my $outfile;                   # The output file
 my $outmod;                    # New column with identifier
+
+
+# BOOLEANS
+# Not all currently used
+my $quiet = 0;
+my $verbose = 0;
+my $show_help = 0;
+my $show_usage = 0;
+my $show_man = 0;
+my $show_version = 0;
+my $do_test = 0;                  # Run the program in test mode
+
 
 #-----------------------------+
 # COMMAND LINE OPTIONS        |
@@ -45,9 +65,46 @@ my $ok = GetOptions(# REQUIRED OPTIONS
 		    "t|terms=s"            => \$search_terms,
                     "i|infile=s"           => \$search_file,
 		    "m|modfie-s"           => \$outmod,
-		    "o|out=s"              => \$outfile,);
- 
-# Open things up
+		    "o|out=s"              => \$outfile,
+		    # ADDITIONAL OPTIONS
+		    "q|quiet"              => \$quiet,
+		    "verbose"              => \$verbose,
+		    # ADDITIONAL INFORMATION
+		    "usage"                => \$show_usage,
+		    "test"                 => \$do_test,
+		    "version"              => \$show_version,
+		    "man"                  => \$show_man,
+		    "h|help"               => \$show_help,);
+
+#-----------------------------+
+# SHOW REQUESTED HELP         |
+#-----------------------------+
+
+
+if ( ($show_usage) ) {
+#    print_help ("usage", File::Spec->rel2abs($0) );
+    print_help ("usage", $0 );
+}
+
+if ( ($show_help) || (!$ok) ) {
+#    print_help ("help",  File::Spec->rel2abs($0) );
+    print_help ("help",  $0 );
+}
+
+if ($show_man) {
+    # User perldoc to generate the man documentation.
+    system ("perldoc $0");
+    exit($ok ? 0 : 2);
+}
+
+if ($show_version) {
+    print "\nextract_terms.pl:\n".
+	"Version: $VERSION\n\n";
+    exit;
+}
+
+
+
 
 if ($search_terms) {
     open (TERMS, "<$search_terms") ||
@@ -56,7 +113,7 @@ if ($search_terms) {
     die "Error: Identify a search term file for input with --terms option.\n ";
 }
 
-# Accept from STDIN if no infile given
+# Accept from STDIN if no infile option is given
 if ($search_file) {
     open (INFILE, "<$search_file") ||
 	die "Can not open infile:\n$search_file\n";
@@ -162,7 +219,73 @@ close (INFILE);
 close (OUT);
 
 
-1;
+#-----------------------------------------------------------+ 
+# SUBFUNCTIONS                                              |
+#-----------------------------------------------------------+
+
+
+sub print_help {
+    my ($help_msg, $podfile) =  @_;
+    # help_msg is the type of help msg to use (ie. help vs. usage)
+    
+    print "\n";
+    
+    #-----------------------------+
+    # PIPE WITHIN PERL            |
+    #-----------------------------+
+    # This code made possible by:
+    # http://www.perlmonks.org/index.pl?node_id=76409
+    # Tie info developed on:
+    # http://www.perlmonks.org/index.pl?node=perltie 
+    #
+    #my $podfile = $0;
+    my $scalar = '';
+    tie *STDOUT, 'IO::Scalar', \$scalar;
+    
+    if ($help_msg =~ "usage") {
+	podselect({-sections => ["SYNOPSIS|MORE"]}, $0);
+    }
+    else {
+	podselect({-sections => ["SYNOPSIS|ARGUMENTS|OPTIONS|MORE"]}, $0);
+    }
+
+    untie *STDOUT;
+    # now $scalar contains the pod from $podfile you can see this below
+    #print $scalar;
+
+    my $pipe = IO::Pipe->new()
+	or die "failed to create pipe: $!";
+    
+    my ($pid,$fd);
+
+    if ( $pid = fork() ) { #parent
+	open(TMPSTDIN, "<&STDIN")
+	    or die "failed to dup stdin to tmp: $!";
+	$pipe->reader();
+	$fd = $pipe->fileno;
+	open(STDIN, "<&=$fd")
+	    or die "failed to dup \$fd to STDIN: $!";
+	my $pod_txt = Pod::Text->new (sentence => 0, width => 78);
+	$pod_txt->parse_from_filehandle;
+	# END AT WORK HERE
+	open(STDIN, "<&TMPSTDIN")
+	    or die "failed to restore dup'ed stdin: $!";
+    }
+    else { #child
+	$pipe->writer();
+	$pipe->print($scalar);
+	$pipe->close();	
+	exit 0;
+    }
+    
+    $pipe->close();
+    close TMPSTDIN;
+
+    print "\n";
+
+    exit 0;
+   
+}
 
 
 1;
