@@ -481,7 +481,7 @@ assigned unique identifiers.
 
 Apache 2.0
 
-L<http://tinyrul.com/jamieapache>
+L<http://www.apache.org/licenses/LICENSE-2.0>
 
 =head1 AUTHOR
 
